@@ -113,6 +113,36 @@
     </div>
 </div>
 
+            <div class="card logs-container">
+    <h3>INDEXING COMMAND CENTER</h3>
+    <table class="log-table">
+        <thead>
+            <tr>
+                <th>Target URL</th>
+                <th>Submission Time</th>
+                <th>Status</th>
+                <th>Index Tracking</th>
+            </tr>
+        </thead>
+        <tbody id="log-body">
+            <tr>
+                <td>/seo-guide-2026</td>
+                <td>14:02:10</td>
+                <td><span class="status-success">SENT</span></td>
+                <td><span class="track-pending">PENDING...</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<style>
+.log-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+.log-table th { color: #71717a; text-align: left; padding: 10px; border-bottom: 1px solid #262629; }
+.log-table td { padding: 12px 10px; color: #e4e4e7; border-bottom: 1px solid #141416; }
+.status-success { color: #10b981; font-weight: bold; }
+.track-pending { color: #f59e0b; font-style: italic; }
+</style>
+            
         </div>
 
         <div id="terminal-log"></div>
@@ -334,6 +364,32 @@ function dismissCTA() {
     
     // Professional touch: Logic to "reset" the ad after 30 days can be added here
 }
+
+        async function submitAndLog(url, apiKey) {
+    const logEntry = { url, time: new Date(), results: [] };
+
+    try {
+        // Example: Sending to IndexNow
+        const response = await axios.post('https://www.bing.com/indexnow', {
+            host: "yourdomain.com",
+            key: apiKey,
+            urlList: [url]
+        });
+
+        if (response.status === 200 || response.status === 202) {
+            logEntry.results.push({ engine: 'IndexNow', status: 'SUCCESS' });
+        }
+    } catch (error) {
+        logEntry.results.push({ 
+            engine: 'IndexNow', 
+            status: 'FAILED', 
+            error: error.response?.data || error.message 
+        });
+    }
+
+    // Save logEntry to your Database here
+    return logEntry;
+        }
 </script>
 
 </body>
