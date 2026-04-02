@@ -142,11 +142,44 @@
 .status-success { color: #10b981; font-weight: bold; }
 .track-pending { color: #f59e0b; font-style: italic; }
 </style>
-            
-        </div>
+</div>
 
-        <div id="terminal-log"></div>
+<div id="terminal-log"></div>
 
+        <div class="log-header">
+    <h3>SUBMISSION ARCHIVE</h3>
+    <button onclick="downloadIndexingLog()" class="btn-download">
+        <span class="icon">⤓</span> EXPORT MANIFEST (.CSV)
+    </button>
+</div>
+
+<style>
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+.btn-download {
+    background: transparent;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 4px;
+}
+
+.btn-download:hover {
+    background: rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+</style>
+        
 <footer style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #e2e8f0; font-size: 13px;">
     <p>© 2026 RapidSubmit.Net™ | Global Indexing Service</p>
     <a href="terms.html">Terms of Use</a> | 
@@ -390,6 +423,35 @@ async function submitAndLog(url, apiKey) {
     // Save logEntry to your Database here
     return logEntry;
         }
+
+        function downloadIndexingLog() {
+    const history = JSON.parse(localStorage.getItem('rapid_history') || '[]');
+    
+    if (history.length === 0) {
+        return alert("COMMAND ERROR: NO DATA FOUND IN LOCAL CACHE.");
+    }
+
+    // Define CSV Headers
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Timestamp,Target URL,Submission Title,Status,Verification\r\n";
+
+    // Populate Rows
+    history.forEach(entry => {
+        const row = `${entry.time},${entry.url},${entry.title},SUCCESS,PENDING_CRAWL`;
+        csvContent += row + "\r\n";
+    });
+
+    // Create Download Link
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `RapidSubmit_Manifest_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+
+    link.click(); // Trigger Download
+    document.body.removeChild(link);
+        }
+        
 </script>
 
 </body>
