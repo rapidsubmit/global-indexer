@@ -20,8 +20,8 @@ app.post('/api/v1/broadcast', async (req, res) => {
         // Note: You can generate a key at Bing Webmaster Tools
         const response = await axios.post('https://www.bing.com/indexnow', {
             host: "rapidsubmit.net",
-            key: "7f70b77948935236b8c8d8e8", // Replace with your real key
-            keyLocation: "https://rapidsubmit.net/7f70b77948935236b8c8d8e8.txt",
+            key: "7b2a9e8d4f3c6a1b5e0d9f8c7b6a5e4d", // Replace with your real key
+            keyLocation: "https://rapidsubmit.net/7b2a9e8d4f3c6a1b5e0d9f8c7b6a5e4d.txt",
             urlList: [url]
         });
 
