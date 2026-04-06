@@ -21,7 +21,7 @@ app.post('/api/v1/broadcast', async (req, res) => {
         const response = await axios.post('https://www.bing.com/indexnow', {
             host: "rapidsubmit.net",
             key: "7b2a9e8d4f3c6a1b5e0d9f8c7b6a5e4d", // Replace with your real key
-            keyLocation: "https://rapidsubmit.net/7b2a9e8d4f3c6a1b5e0d9f8c7b6a5e4d.txt",
+            keyLocation: "https://rapidsubmit.github.io/global-indexer/7b2a9e8d4f3c6a1b5e0d9f8c7b6a5e4d.txt",
             urlList: [url]
         });
 
