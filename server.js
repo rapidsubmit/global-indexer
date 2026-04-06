@@ -5,7 +5,7 @@ const app = express();
 
 // 1. SECURITY: Only allow your GitHub Pages URL to talk to this backend
 app.use(cors({
-    origin: 'https://your-username.github.io' 
+    origin: 'https://rapidsubmit.github.io' 
 }));
 app.use(express.json());
 
