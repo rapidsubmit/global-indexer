@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /cgi-bin/
+Disallow: /scripts/
+
+Sitemap: https://rapidsubmit.github.io/global-indexer/sitemap.xml
