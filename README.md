@@ -32,5 +32,6 @@ RapidSubmit operates on a Privacy-First model. All submission data and logs are 
 
 License
 Proprietary software. All rights reserved by RapidSubmit Global Solutions.
+
 Developed by
 Usman Abubakar MD/CEO, RapidSubmit Global Solutions.
